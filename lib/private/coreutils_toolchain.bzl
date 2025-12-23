@@ -62,7 +62,7 @@ COREUTILS_VERSIONS = {
        },
        "linux_riscv64": {
          "filename": "coreutils-0.5.0-riscv64gc-unknown-linux-musl.tar.gz",
-         "sha256": "sha256-uJUyLb6Vo/p4afKHZqYCf181QHLxa15o0WMr53Ur5w4="
+         "sha256": "sha256-vPQplD+RzWfZlRPwlhuuKNeefFcThDagN03eErwW6Rs="
         },
        "darwin_amd64": {
          "filename": "coreutils-0.5.0-x86_64-apple-darwin.tar.gz",
