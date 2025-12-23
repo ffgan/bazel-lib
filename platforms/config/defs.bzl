@@ -3,5 +3,5 @@
 platforms = [
     struct(os = os, cpu = cpu)
     for os in ["linux", "macos"]
-    for cpu in ["aarch64", "x86_64"]
+    for cpu in ["aarch64", "x86_64", "riscv64"]
 ]

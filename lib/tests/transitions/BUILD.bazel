@@ -202,7 +202,7 @@ sh_test(
     srcs = ["test_file_type_contains.sh"],
     args = [
         "$(rlocationpath :transitioned_go_binary_riscv64)",
-        "aarch64",
+        "riscv64",
     ],
     data = [
         ":transitioned_go_binary_riscv64",
@@ -244,7 +244,7 @@ sh_test(
     srcs = ["test_file_type_contains.sh"],
     args = [
         "$(rlocationpath :transitioned_go_test_riscv64)",
-        "aarch64",
+        "riscv64",
     ],
     data = [
         ":transitioned_go_test_riscv64",
