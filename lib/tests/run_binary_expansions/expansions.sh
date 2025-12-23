@@ -10,5 +10,6 @@ for each in $@; do
   sanitized=${sanitized/x86_64/PLATFORM}
   sanitized=${sanitized/x64_windows/PLATFORM}
   sanitized=${sanitized/_arm64/}
+  sanitized=${sanitized/riscv64/PLATFORM}
   echo "$sanitized" >>"$outfile"
 done
