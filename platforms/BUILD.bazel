@@ -24,6 +24,12 @@ alias(
     visibility = ["//visibility:public"],
 )
 
+alias(
+    name = "linux_riscv64",
+    actual = ":linux_riscv64",
+    visibility = ["//visibility:public"],
+)
+
 platform(
     name = "x86_64_linux_remote",
     constraint_values = [

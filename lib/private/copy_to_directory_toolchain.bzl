@@ -36,6 +36,12 @@ COPY_TO_DIRECTORY_PLATFORMS = {
             "@platforms//cpu:aarch64",
         ],
     ),
+    "linux_riscv64": struct(
+        compatible_with = [
+            "@platforms//os:linux",
+            "@platforms//cpu:riscv64",
+        ],
+    ),
     "linux_s390x": struct(
         compatible_with = [
             "@platforms//os:linux",

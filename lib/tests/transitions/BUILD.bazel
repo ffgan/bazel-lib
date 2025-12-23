@@ -33,6 +33,14 @@ platform(
     ],
 )
 
+platform(
+    name = "riscv64_linux",
+    constraint_values = [
+        "@platforms//os:linux",
+        "@platforms//cpu:riscv64",
+    ],
+)
+
 config_setting(
     name = "is_x86",
     constraint_values = [
@@ -121,6 +129,12 @@ platform_transition_binary(
     target_platform = "arm64_linux",
 )
 
+platform_transition_binary(
+    name = "transitioned_go_binary_riscv64",
+    binary = ":test_transition_binary",
+    target_platform = "riscv64_linux",
+)
+
 platform_transition_test(
     name = "transitioned_go_test_x86_64",
     binary = ":test_transition_test",
@@ -141,6 +155,17 @@ platform_transition_test(
         "@platforms//os:linux",
     ] else ["@platforms//:incompatible"],
     target_platform = "arm64_linux",
+)
+
+platform_transition_test(
+    name = "transitioned_go_test_riscv64",
+    binary = ":test_transition_test",
+    # only run this test on an riscv64 linux host
+    target_compatible_with = [] if sorted(HOST_CONSTRAINTS) == [
+        "@platforms//cpu:riscv64",
+        "@platforms//os:linux",
+    ] else ["@platforms//:incompatible"],
+    target_platform = "riscv64_linux",
 )
 
 sh_test(
@@ -172,6 +197,20 @@ sh_test(
 )
 
 sh_test(
+    name = "test_go_binary_is_riscv64",
+    size = "small",
+    srcs = ["test_file_type_contains.sh"],
+    args = [
+        "$(rlocationpath :transitioned_go_binary_riscv64)",
+        "aarch64",
+    ],
+    data = [
+        ":transitioned_go_binary_riscv64",
+        "@bazel_tools//tools/bash/runfiles",
+    ],
+)
+
+sh_test(
     name = "test_go_test_is_x86_64",
     size = "small",
     srcs = ["test_file_type_contains.sh"],
@@ -195,6 +234,20 @@ sh_test(
     ],
     data = [
         ":transitioned_go_test_arm64",
+        "@bazel_tools//tools/bash/runfiles",
+    ],
+)
+
+sh_test(
+    name = "test_go_test_is_riscv64",
+    size = "small",
+    srcs = ["test_file_type_contains.sh"],
+    args = [
+        "$(rlocationpath :transitioned_go_test_riscv64)",
+        "aarch64",
+    ],
+    data = [
+        ":transitioned_go_test_riscv64",
         "@bazel_tools//tools/bash/runfiles",
     ],
 )

@@ -26,6 +26,12 @@ COREUTILS_PLATFORMS = {
             "@platforms//cpu:aarch64",
         ],
     ),
+    "linux_riscv64": struct(
+        compatible_with = [
+            "@platforms//os:linux",
+            "@platforms//cpu:riscv64",
+        ],
+    ),
     "windows_amd64": struct(
         compatible_with = [
             "@platforms//os:windows",
@@ -45,6 +51,36 @@ COREUTILS_PLATFORMS = {
 # The integrity hashes can be automatically fetched for the coreutils releases by running
 # `tools/coreutils_mirror_release.sh`.
 COREUTILS_VERSIONS = {
+    "0.5.1": {
+       "darwin_arm64": {
+         "filename": "coreutils-0.5.1-aarch64-apple-darwin.tar.gz",
+         "sha256": "sha256-xr3aHNiQsTkuF2/JS8LWpw0zIf2w7bGJbevZw4s0dd4="
+       },
+       "linux_arm64": {
+         "filename": "coreutils-0.5.1-aarch64-unknown-linux-musl.tar.gz",
+         "sha256": "sha256-YOOEhjqQw09bq+S7s7WvX1+I2ne9hwad6wC3zW0aTvA="
+       },
+       "linux_riscv64": {
+         "filename": "coreutils-0.5.0-riscv64gc-unknown-linux-musl.tar.gz",
+         "sha256": "sha256-0JDnIPTpVXDizpcyuTrj+QeoDO9J9Qp2n7vKWp07Y1M="
+       },
+       "darwin_amd64": {
+         "filename": "coreutils-0.5.0-x86_64-apple-darwin.tar.gz",
+         "sha256": "sha256-nGtoyx4BYZ7V/y+WkeWNnkA15hIOIQMMRgj5ojSjCJ0="
+       },
+       "windows_amd64": {
+         "filename": "coreutils-0.5.0-x86_64-pc-windows-msvc.zip",
+         "sha256": "sha256-ugoxmirPCrLBeG+3WiRgkNkF9JdiY46QO0+P8xlbcr4="
+       },
+       "linux_amd64": {
+         "filename": "coreutils-0.5.0-x86_64-unknown-linux-musl.tar.gz",
+         "sha256": "sha256-3Dztb6jqY/IGQLTLYQAXxK+o/a9jGMmYFhu69ee/yDA="
+       },
+       "windows_arm64": {
+         "filename": "coreutils-0.5.1-aarch64-pc-windows-msvc.zip",
+         "sha256": "sha256-LSiPqXZF4ilyPxjesc69fZrzN9p+MT0uRHkR/WoTdDM="
+       },
+     },
     "0.5.0": {
         "darwin_arm64": {
             "filename": "coreutils-0.5.0-aarch64-apple-darwin.tar.gz",
@@ -260,7 +296,7 @@ def _coreutils_platform_repo_impl(rctx):
     version = rctx.attr.version
     if "version_override" in COREUTILS_VERSIONS[rctx.attr.version][platform]:
         version = COREUTILS_VERSIONS[rctx.attr.version][platform]["version_override"]
-    url = "https://github.com/uutils/coreutils/releases/download/{}/{}".format(
+    url = "https://github.com/ffgan/coreutils/releases/download/{}/{}".format(
         version,
         filename,
     )
