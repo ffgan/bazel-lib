@@ -8,6 +8,6 @@ for each in $@; do
   sanitized=${each/darwin/PLATFORM}
   sanitized=${sanitized/k8/PLATFORM}
   sanitized=${sanitized/_arm64/}
-  sanitized=${sanitized/_riscv64/}
+  sanitized=${sanitized/riscv64/PLATFORM}
   echo $sanitized >>$outfile
 done
