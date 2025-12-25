@@ -28,6 +28,12 @@ YQ_PLATFORMS = {
             "@platforms//cpu:aarch64",
         ],
     ),
+    "linux_riscv64": struct(
+        compatible_with = [
+            "@platforms//os:linux",
+            "@platforms//cpu:riscv64",
+        ],
+    ),
     "linux_s390x": struct(
         compatible_with = [
             "@platforms//os:linux",
@@ -50,7 +56,7 @@ YQ_PLATFORMS = {
 
 # Note: this is not the latest release, because it has significant breaking changes.
 # See https://github.com/aspect-build/bazel-lib/pull/421
-DEFAULT_YQ_VERSION = "4.25.2"
+DEFAULT_YQ_VERSION = "4.50.1"
 
 # https://github.com/mikefarah/yq/releases
 #
@@ -61,6 +67,16 @@ DEFAULT_YQ_VERSION = "4.25.2"
 # Alternatively, you can compute them manually by running
 # `shasum -b -a 384 [downloaded file] | awk '{ print $1 }' | xxd -r -p | base64`
 YQ_VERSIONS = {
+    "4.50.1": {
+        "darwin_amd64": "sha384-0NfwombhUaXqGXsfHwE1ajV5YZS8fN8GZzRj2YFNgYOe8WSbmdEJ/nRiuJi/FA/9",
+        "darwin_arm64": "sha384-xumi1iKE0VgWwwdgcRSHwSkOZRB7WkmDpXZwfY9jSGjNCbS1nztVV3kGhow9lYL+",
+        "linux_amd64": "sha384-nS+Z3PgNk/jbBgyrdi2DD8/JNU7kMojCOpeO5ae7s+Mb387b9/OAGls+LNS8SjaT",
+        "linux_arm64": "sha384-nKv0CpjeFh/+gLln5MPLvz6VSc7Mpp4PuO6MDf/y+f4tx17NNO1nOyF4m5PBf1BG",
+        "linux_s390x": "sha384-dE/iBErLNR/aHESmJ/Ewqzu8xNbJdVktdDo704we5BCIzFaRgyEyUH8pgIC5FWov",
+        "linux_ppc64le": "sha384-GqsEfcENVxTNj/nr9MFUiOl3W18ruwiDJPdyp9tZlvoHex5vbEExNtfjFdvcNzP8",
+        "linux_riscv64": "sha384-k9oAZlzouo1JEo+ZSd+ZO5lYiVpl1RGJi9XF3nE+jaYITe1pGNo9TXgqPv/KC9PG",
+        "windows_amd64": "sha384-9FQYHz7tNeEAbNDrC1PRH20U6fsnjAKAoTNIIgYrIMJ76aUUVGgZKNgIj+Khp9D+",
+    },
     "4.33.3": {
         "darwin_amd64": "sha384-IJhMHD71yq+OR8AHFPfZr3XVpFlG2ZAfcexDKojtSLcCMV1pw0X2jza4qFUZiKEt",
         "darwin_arm64": "sha384-euQkz1Bu/dFuJoRgG4xIh9BhP2RvOceTDPSY8EzSIM5xykbMkwDNhr1PtCcUF5ye",
