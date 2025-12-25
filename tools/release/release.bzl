@@ -11,6 +11,7 @@ PLATFORMS = [
     struct(os = "freebsd", arch = "amd64", ext = "", gc_linkopts = ["-s", "-w"]),
     struct(os = "linux", arch = "amd64", ext = "", gc_linkopts = ["-s", "-w"]),
     struct(os = "linux", arch = "arm64", ext = "", gc_linkopts = ["-s", "-w"]),
+    struct(os = "linux", arch = "riscv64", ext = "", gc_linkopts = ["-s", "-w"]),
     struct(os = "windows", arch = "amd64", ext = ".exe", gc_linkopts = []),
 ]
 

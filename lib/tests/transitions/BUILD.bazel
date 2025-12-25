@@ -34,10 +34,26 @@ platform(
     ],
 )
 
+platform(
+    name = "riscv64_linux",
+    constraint_values = [
+        "@platforms//os:linux",
+        "@platforms//cpu:riscv64",
+        "@io_bazel_rules_go//go/toolchain:cgo_off",  # https://github.com/bazelbuild/rules_go/pull/3390
+    ],
+)
+
 config_setting(
     name = "is_x86",
     constraint_values = [
         "@platforms//cpu:x86_64",
+    ],
+)
+
+config_setting(
+    name = "is_riscv64",
+    constraint_values = [
+        "@platforms//cpu:riscv64",
     ],
 )
 
@@ -47,6 +63,7 @@ filegroup(
     name = "platform_description",
     srcs = select({
         ":is_x86": ["linux_x86.txt"],
+        ":is_riscv64": ["linux_riscv64.txt"],
         "//conditions:default": ["linux_arm.txt"],
     }),
 )
@@ -63,6 +80,12 @@ platform_transition_filegroup(
     target_platform = ":armv7_linux",
 )
 
+platform_transition_filegroup(
+    name = "for_riscv64",
+    srcs = ["platform_description"],
+    target_platform = ":riscv64_linux",
+)
+
 genrule(
     name = "for_x86_path",
     srcs = [":for_x86"],
@@ -75,6 +98,13 @@ genrule(
     srcs = [":for_arm"],
     outs = ["for_arm_path.txt"],
     cmd = "echo $(rootpath :for_arm) > $@",
+)
+
+genrule(
+    name = "for_riscv64_path",
+    srcs = [":for_riscv64"],
+    outs = ["for_riscv64_path.txt"],
+    cmd = "echo $(rootpath :for_riscv64) > $@",
 )
 
 write_file(
@@ -95,6 +125,15 @@ write_file(
     ],
 )
 
+write_file(
+    name = "expected_riscv64_path",
+    out = "expected_riscv64_path.txt",
+    content = [
+        "lib/tests/transitions/linux_riscv64.txt",
+        "",
+    ],
+)
+
 diff_test(
     name = "test_x86",
     file1 = ":for_x86_path",
@@ -105,6 +144,12 @@ diff_test(
     name = "test_arm",
     file1 = ":for_arm_path",
     file2 = ":expected_arm_path",
+)
+
+diff_test(
+    name = "test_riscv64",
+    file1 = ":for_riscv64_path",
+    file2 = ":expected_riscv64_path",
 )
 
 go_binary(
@@ -131,6 +176,12 @@ platform_transition_binary(
     target_platform = "arm64_linux",
 )
 
+platform_transition_binary(
+    name = "transitioned_go_binary_riscv64",
+    binary = ":test_transition_binary",
+    target_platform = "riscv64_linux",
+)
+
 platform_transition_test(
     name = "transitioned_go_test_x86_64",
     binary = ":test_transition_test",
@@ -149,6 +200,16 @@ platform_transition_test(
         "@platforms//cpu:arm64",
     ],
     target_platform = "arm64_linux",
+)
+
+platform_transition_test(
+    name = "transitioned_go_test_riscv64",
+    binary = ":test_transition_test",
+    # only run this test on riscv64 platforms
+    target_compatible_with = [
+        "@platforms//cpu:riscv64",
+    ],
+    target_platform = "riscv64_linux",
 )
 
 sh_test(
@@ -172,6 +233,16 @@ sh_test(
 )
 
 sh_test(
+    name = "test_go_binary_is_riscv64",
+    srcs = ["test_file_type_contains.sh"],
+    args = [
+        "$(rootpath :transitioned_go_binary_riscv64)",
+        "riscv64",
+    ],
+    data = [":transitioned_go_binary_riscv64"],
+)
+
+sh_test(
     name = "test_go_test_is_x86_64",
     srcs = ["test_file_type_contains.sh"],
     args = [
@@ -189,6 +260,16 @@ sh_test(
         "aarch64",
     ],
     data = [":transitioned_go_test_arm64"],
+)
+
+sh_test(
+    name = "test_go_test_is_riscv64",
+    srcs = ["test_file_type_contains.sh"],
+    args = [
+        "$(rootpath :transitioned_go_test_riscv64)",
+        "riscv64",
+    ],
+    data = [":transitioned_go_test_riscv64"],
 )
 
 go_library(

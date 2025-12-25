@@ -25,6 +25,12 @@ ZSTD_PLATFORMS = {
             "@platforms//cpu:aarch64",
         ],
     ),
+    "linux_riscv64": struct(
+        compatible_with = [
+            "@platforms//os:linux",
+            "@platforms//cpu:riscv64",
+        ],
+    ),
 }
 
 ZSTD_PREBUILT = {
@@ -43,6 +49,10 @@ ZSTD_PREBUILT = {
     "linux_arm64": (
         "https://github.com/aspect-build/zstd-prebuilt/releases/download/v1.5.6/zstd_linux_arm64",
         "82aacf8f1c67ff3c94e04afb0721a848bbba70fbf8249ee4bc4c9085afb84548",
+    ),
+    "linux_riscv64": (
+        "https://github.com/ffgan/zstd-prebuilt/releases/download/v1.5.6-bcr3/zstd_linux_riscv64",
+        "4bd80e57f3180decb5cf69faf768fbe9c38ebc1569dbd7e5b0d782ea4bfcceca",
     ),
 }
 
