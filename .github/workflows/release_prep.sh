@@ -39,7 +39,7 @@ http_archive(
     name = "aspect_bazel_lib",
     sha256 = "${SHA}",
     strip_prefix = "${PREFIX}",
-    url = "https://github.com/aspect-build/bazel-lib/releases/download/${TAG}/${ARCHIVE}",
+    url = "https://github.com/ffgan/bazel-lib/releases/download/${TAG}/${ARCHIVE}",
 )
 
 load("@aspect_bazel_lib//lib:repositories.bzl", "aspect_bazel_lib_dependencies", "aspect_bazel_lib_register_toolchains")

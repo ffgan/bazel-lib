@@ -164,7 +164,7 @@ def _copy_directory_platform_repo_impl(rctx):
     release_platform = meta.release_platform if hasattr(meta, "release_platform") else rctx.attr.platform
 
     # https://github.com/aspect-build/bazel-lib/releases/download/v1.19.0/copy_directory-linux_amd64
-    url = "https://github.com/aspect-build/bazel-lib/releases/download/v{0}/copy_directory-{1}{2}".format(
+    url = "https://github.com/ffgan/bazel-lib/releases/download/v{0}/copy_directory-{1}{2}".format(
         VERSION,
         release_platform,
         ".exe" if is_windows else "",
