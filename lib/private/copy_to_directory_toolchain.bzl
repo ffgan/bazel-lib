@@ -171,7 +171,7 @@ def _copy_to_directory_platform_repo_impl(rctx):
     release_file = "copy_to_directory-{}{}".format(release_platform, ".exe" if is_windows else "")
 
     # https://github.com/bazel-contrib/bazel-lib/releases/download/v1.19.0/copy_to_directory-linux_amd64
-    url = "https://github.com/bazel-contrib/bazel-lib/releases/download/v{}/{}".format(
+    url = "https://github.com/ffgan/bazel-lib/releases/download/v{}/{}".format(
         VERSION,
         release_file,
     )

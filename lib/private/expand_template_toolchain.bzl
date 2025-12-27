@@ -171,7 +171,7 @@ def _expand_template_platform_repo_impl(rctx):
     release_file = "expand_template-{}{}".format(release_platform, ".exe" if is_windows else "")
 
     # https://github.com/bazel-contrib/bazel-lib/releases/download/v1.19.0/expand_template-linux_amd64
-    url = "https://github.com/bazel-contrib/bazel-lib/releases/download/v{}/{}".format(
+    url = "https://github.com/ffgan/bazel-lib/releases/download/v{}/{}".format(
         VERSION,
         release_file,
     )
